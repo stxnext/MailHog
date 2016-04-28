@@ -25,6 +25,7 @@ deps:
 	go get labix.org/v2/mgo
 	# added to fix travis issues
 	go get golang.org/x/crypto/bcrypt
+	patch src/github.com/mailhog/smtp/protocol.go protocol_changes.diff
 
 test-deps:
 	go get github.com/smartystreets/goconvey
@@ -59,4 +60,4 @@ rocker-deps:
 dockerhub: rocker
 	docker push mailhog/mailhog
 
-.PNONY: all combined release fmt deps test-deps release-deps pull tag rocker rocker-deps
+.PHONY: all combined release fmt deps test-deps release-deps pull tag rocker rocker-deps
