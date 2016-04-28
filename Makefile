@@ -15,7 +15,7 @@ deps:
 	go get github.com/mailhog/MailHog-Server
 	go get github.com/mailhog/MailHog-UI
 	go get github.com/mailhog/mhsendmail
-	cd ../MailHog-UI; make bindata
+	cd src/github.com/mailhog/MailHog-UI; make bindata
 	go get github.com/mailhog/http
 	go get github.com/ian-kent/go-log/log
 	go get github.com/ian-kent/envconf
@@ -25,6 +25,7 @@ deps:
 	go get labix.org/v2/mgo
 	# added to fix travis issues
 	go get golang.org/x/crypto/bcrypt
+	patch src/github.com/mailhog/smtp/protocol.go protocol_changes.diff
 
 test-deps:
 	go get github.com/smartystreets/goconvey
@@ -59,4 +60,4 @@ rocker-deps:
 dockerhub: rocker
 	docker push mailhog/mailhog
 
-.PNONY: all combined release fmt deps test-deps release-deps pull tag rocker rocker-deps
+.PHONY: all combined release fmt deps test-deps release-deps pull tag rocker rocker-deps
